@@ -130,3 +130,24 @@ echo Execution is governed by what a system is allowed to do — at the moment o
 
 ) > README.md
 
+## Structure
+
+This repository is intentionally minimal and scoped to the execution boundary.
+
+reference-surface/
+  canonicalize.py
+  admissibility.py
+  authorization.py
+  replay_cache.py
+  control_point.py
+  run_demo.py
+
+examples/
+  README.md
+  allow-flow.md
+  boundary-tightening.md
+  bypass-rejection.md
+  deny-flow.md
+  invalid-override.md
+  replay-rejection.md
+  valid-override.md
