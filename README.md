@@ -1,8 +1,8 @@
-﻿# Unified Agency Architecture (UAA)
+# Unified Agency Architecture (UAA)
 
 Unified Agency Architecture (UAA) defines an execution model in which:
 
-> Execution authority does not exist by default.
+Execution authority does not exist by default.
 
 UAA separates:
 
@@ -42,9 +42,9 @@ No execution path may bypass control-point verification.
 ## What This Repository Contains
 
 - core/ - foundational invariants
-- ormal/ - execution semantics, artifact model, conformance mapping, verification
-- oundary/ - boundary definition
-- udit/ - audit model and example records
+- formal/ - execution semantics, artifact model, conformance mapping, verification
+- boundary/ - boundary definition
+- audit/ - audit model and example records
 - examples/reference_surface/ - runnable reference surface
 
 ---
@@ -86,14 +86,14 @@ The architecture is defined across five linked layers:
 5. Audit Model  
    Minimum evidence required to reconstruct execution vs. block outcomes
 
-These layers are linked through ormal/conformance-mapping.md.
+These layers are linked through formal/conformance-mapping.md.
 
 ---
 
 ## How to Verify UAA
 
-1. python -m compileall .
-2. python examples/reference_surface/run_demo.py
+python -m compileall .
+python examples/reference_surface/run_demo.py
 
 Expected visible outcomes include:
 
@@ -115,7 +115,7 @@ UAA is not:
 
 UAA is:
 
-> An execution authority architecture in which admissibility is evaluated externally and enforced at the point of execution.
+An execution authority architecture in which admissibility is evaluated externally and enforced at the point of execution.
 
 ---
 
