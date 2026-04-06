@@ -1,165 +1,86 @@
-\# UAA Reference Surface
+﻿# Unified Agency Architecture (UAA)
 
+Unified Agency Architecture (UAA) is a governance architecture for deterministic execution control.
 
+Its governing principle is:
 
-This repository provides a minimal executable proof of \*\*Unified Agency Architecture (UAA)\*\* as an execution-governance control system.
+> Execution authority does not exist by default.
 
+UAA separates capability from authority.
 
+A system may be capable of proposing, constructing, or transmitting an action without possessing the authority to effectuate it.
 
-UAA enforces a single governing invariant:
+Execution authority is derived only when a proposed action is:
 
+1. Canonicalized
+2. Evaluated for admissibility against an active boundary state
+3. Bound to a specific execution attempt
+4. Authorized through a verifiable artifact
+5. Re-verified at the required control point immediately before execution
 
+If admissibility is not established, if verification fails, or if authorization is absent, execution does not occur.
 
-\*\*Execution authority does not exist by default.\*\*
+This is fail-closed by design.
 
+## What this repository shows
 
+This repository provides a minimal UAA reference surface.
 
-Systems may generate arbitrary actions, but no action is allowed to execute unless authority is explicitly derived at runtime and verified at the control point immediately before execution.
+It is not a generic demo repository.
+It is a structured enforcement surface that demonstrates the category claim in executable form.
 
+The repository is organized around three functions:
 
+- `README.md`  
+  Category definition and governing claims
 
-\---
+- `reference-surface/`  
+  Minimal formal reference surface for UAA enforcement logic
 
+- `examples/`  
+  Executable example showing canonicalization, admissibility evaluation, authorization artifact issuance, control-point verification, and deterministic execution or block
 
+## Governing architectural claims
 
-\## What this repository proves
+The reference surface demonstrates the following core properties:
 
+- **Non-default authority**  
+  Authority is never assumed from capability
 
+- **Admissibility precedes authority**  
+  Boundary evaluation comes before authorization
 
-This reference surface demonstrates that execution can be governed externally with:
+- **Artifact-required execution**  
+  Execution requires a valid authorization artifact
 
+- **Control-point verification**  
+  Authorization must be re-verified at the execution boundary
 
+- **Fail-closed execution**  
+  Missing or invalid authority results in no effect
 
-\- canonical action representation
+- **Attempt binding**  
+  Authorization is scoped to a specific execution attempt
 
-\- admissibility evaluation against an active boundary
+- **Deterministic auditability**  
+  The decision path is reconstructible from the execution record
 
-\- authorization artifact issuance per attempt
+## Minimal repository structure
 
-\- control-point verification immediately before execution
+.
+├── README.md
+├── reference-surface/
+│   └── README.md
+└── examples/
+    ├── README.md
+    └── demo.py
 
-\- replay detection and rejection
+## Interpretation
 
-\- fail-closed behavior
+This repository should be read as a minimal category-defining reference surface for UAA.
 
-\- zero execution without valid authority
+It is intended to communicate one point clearly:
 
+A system that can act is not, by that fact alone, authorized to act.
 
-
-\---
-
-
-
-\## Run the demo
-
-
-
-From the repository root:
-
-
-
-Expected behavior:
-
-
-
-\- valid action → EXECUTED
-
-\- replayed token → BLOCKED (replay detected)
-
-\- invalid action → rejected at admissibility
-
-\- execution without token → BLOCKED
-
-
-
-This is a behavioral proof: modify inputs and observe that unauthorized execution cannot occur.
-
-
-
-\---
-
-
-
-\## Why this matters
-
-
-
-Most systems collapse capability and authority:
-
-
-
-If a system can produce an action, it is often allowed to execute it.
-
-
-
-UAA separates these concerns:
-
-
-
-\- capability → what can be generated  
-
-\- authority → what is allowed to execute  
-
-
-
-This repository demonstrates that separation in executable form.
-
-
-
-\---
-
-
-
-\## Repository role
-
-
-
-This is the \*\*reference surface\*\* for UAA.
-
-
-
-It is designed to:
-
-
-
-\- be runnable  
-
-\- be inspectable  
-
-\- prove enforcement behavior  
-
-
-
-It is not a full production system and does not include full infrastructure, cryptographic deployment, or distributed enforcement layers.
-
-
-
-\---
-
-
-
-\## Structure
-
-
-
-This repository is intentionally minimal and scoped to the execution boundary.
-
-
-
-
-\---
-
-
-
-\## Core takeaway
-
-
-
-Execution is not governed by what a system can do.
-
-
-
-Execution is governed by what a system is allowed to do — at the moment of execution.
-
-
-
+Under UAA, effectuation requires independently derived execution authority at the moment of execution.
