@@ -6,7 +6,7 @@ It exists to eliminate ambiguity in how UAA components relate and to demonstrate
 
 ---
 
-## 1. Purpose
+## Purpose
 
 UAA is defined by invariants, executed through semantics, and demonstrated through runtime behavior.
 
@@ -16,9 +16,7 @@ Invariant ? Semantic Rule ? Enforcement Mechanism ? Observable Outcome
 
 ---
 
-## 2. Mapping Table
-
-### I1. Non-Default Authority
+## I1. Non-Default Authority
 
 - Semantic Rule:
   Authority is not present at action proposal or canonicalization.
@@ -31,33 +29,33 @@ Invariant ? Semantic Rule ? Enforcement Mechanism ? Observable Outcome
 
 ---
 
-### I2. Admissibility Precedes Authority
+## I2. Admissibility Precedes Authority
 
 - Semantic Rule:
   Authorization artifact issuance occurs only after admissibility evaluation.
 
 - Enforcement Mechanism:
-  issue_token() is not invoked for inadmissible actions.
+  Inadmissible actions do not produce executable artifacts.
 
 - Observable Outcome:
-  Inadmissible actions never produce executable artifacts.
+  Invalid action evaluates inadmissible and does not execute.
 
 ---
 
-### I3. Fail-Closed Execution
+## I3. Fail-Closed Execution
 
 - Semantic Rule:
-  Any failure in canonicalization, admissibility, authorization, or verification resolves to block.
+  Any failure in evaluation, authorization, or verification resolves to block.
 
 - Enforcement Mechanism:
-  Control point returns block on any failed check.
+  Control-point checks deny execution on any invalid state.
 
 - Observable Outcome:
-  All invalid conditions produce BLOCKED
+  Invalid conditions produce BLOCKED
 
 ---
 
-### I4. Artifact-Required Execution
+## I4. Artifact-Required Execution
 
 - Semantic Rule:
   Execution requires a valid authorization artifact.
@@ -70,36 +68,36 @@ Invariant ? Semantic Rule ? Enforcement Mechanism ? Observable Outcome
 
 ---
 
-### I5. Control-Point Verification
+## I5. Control-Point Verification
 
 - Semantic Rule:
   Authority must be verified immediately before execution.
 
 - Enforcement Mechanism:
-  All execution paths route through control_point.py.
+  All governed execution paths route through the control point.
 
 - Observable Outcome:
   Direct execution attempts return BLOCKED: control point not invoked
 
 ---
 
-### I6. No Effect on Block
+## I6. No Effect on Block
 
 - Semantic Rule:
   Blocked actions must not produce governed effects.
 
 - Enforcement Mechanism:
-  Execution is gated strictly after verification.
+  Effectuation occurs only after successful verification.
 
 - Observable Outcome:
-  No execution output is produced for blocked actions.
+  No executed result is produced for blocked attempts.
 
 ---
 
-### I7. Replay Resistance
+## I7. Replay Resistance
 
 - Semantic Rule:
-  Authorization artifacts are valid for a single use.
+  Authorization artifacts are single-use and non-replayable.
 
 - Enforcement Mechanism:
   Nonce tracking via replay cache.
@@ -109,38 +107,34 @@ Invariant ? Semantic Rule ? Enforcement Mechanism ? Observable Outcome
 
 ---
 
-### I8. Measurement is not Authority
+## I8. Measurement Is Not Authority
 
 - Semantic Rule:
-  Observations or metrics do not grant execution authority.
+  Observation or telemetry cannot grant execution authority.
 
 - Enforcement Mechanism:
-  No measurement path feeds directly into authorization.
+  No measurement path can substitute for authorization artifact issuance.
 
 - Observable Outcome:
-  No execution occurs without artifact issuance regardless of system observation.
+  No execution occurs without valid authorization regardless of observation.
 
 ---
 
-## 3. Cross-Layer Consistency
+## Cross-Layer Consistency
 
 Each invariant is:
 
 - defined in /core
-- enforced in /formal
+- formalized in /formal
 - instantiated in /examples/reference_surface
-- observable via runtime output
-- reconstructible via /audit
+- observable through runtime behavior
+- reconstructible through /audit
 
-No invariant exists without:
-
-- a semantic definition
-- an enforcement path
-- a runtime manifestation
+No invariant is complete unless all five layers align.
 
 ---
 
-## 4. Conformance Condition
+## Conformance Condition
 
 A system is conformant with UAA only if:
 
@@ -148,21 +142,3 @@ A system is conformant with UAA only if:
 - semantic rules are implemented without contradiction
 - enforcement mechanisms are non-bypassable
 - observable outcomes match expected invariant behavior
-
----
-
-## 5. Interpretation Constraint
-
-UAA must be interpreted as a unified system.
-
-Isolated interpretation of:
-- invariants without semantics
-- semantics without enforcement
-- enforcement without audit
-
-is non-conformant.
-
-Conformance requires cross-layer consistency.
-
----
-
