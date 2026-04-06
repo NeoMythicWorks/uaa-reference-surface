@@ -1,153 +1,165 @@
-cd C:\\Users\\18177\\OneDrive\\Desktop\\uaa(
+\# UAA Reference Surface
 
-echo # UAA Reference Surface
 
-echo.
 
-echo This repository provides a minimal executable proof of \*\*Unified Agency Architecture (UAA)\*\* as an execution-governance control system.
+This repository provides a minimal executable proof of \*\*Unified Agency Architecture (UAA)\*\* as an execution-governance control system.
 
-echo.
 
-echo UAA enforces a single governing invariant:
 
-echo.
+UAA enforces a single governing invariant:
 
-echo \*\*Execution authority does not exist by default.\*\*
 
-echo.
 
-echo Systems may generate arbitrary actions, but no action is allowed to execute unless authority is explicitly derived at runtime and verified at the control point immediately before execution.
+\*\*Execution authority does not exist by default.\*\*
 
-echo.
 
-echo ---
 
-echo.
+Systems may generate arbitrary actions, but no action is allowed to execute unless authority is explicitly derived at runtime and verified at the control point immediately before execution.
 
-echo ## What this repository proves
 
-echo.
 
-echo - canonical action representation
+\---
 
-echo - admissibility evaluation against an active boundary
 
-echo - authorization artifact issuance per attempt
 
-echo - control-point verification immediately before execution
+\## What this repository proves
 
-echo - replay detection and rejection
 
-echo - fail-closed behavior
 
-echo - zero execution without valid authority
+This reference surface demonstrates that execution can be governed externally with:
 
-echo.
 
-echo ---
 
-echo.
+\- canonical action representation
 
-echo ## Run the demo
+\- admissibility evaluation against an active boundary
 
-echo.
+\- authorization artifact issuance per attempt
 
-echo python examples\\demo.py
+\- control-point verification immediately before execution
 
-echo.
+\- replay detection and rejection
 
-echo Expected behavior:
+\- fail-closed behavior
 
-echo - valid action → EXECUTED
+\- zero execution without valid authority
 
-echo - replayed token → BLOCKED
 
-echo - invalid action → rejected
 
-echo - execution without token → BLOCKED
+\---
 
-echo.
 
-echo ---
 
-echo.
+\## Run the demo
 
-echo ## Structure
 
-echo.
 
-echo This repository is intentionally minimal and scoped to the execution boundary.
+From the repository root:
 
-echo.
 
-echo reference-surface/
 
-echo   canonicalize.py
+Expected behavior:
 
-echo   admissibility.py
 
-echo   authorization.py
 
-echo   replay\_cache.py
+\- valid action → EXECUTED
 
-echo   control\_point.py
+\- replayed token → BLOCKED (replay detected)
 
-echo   run\_demo.py
+\- invalid action → rejected at admissibility
 
-echo.
+\- execution without token → BLOCKED
 
-echo examples/
 
-echo   README.md
 
-echo   allow-flow.md
+This is a behavioral proof: modify inputs and observe that unauthorized execution cannot occur.
 
-echo   boundary-tightening.md
 
-echo   bypass-rejection.md
 
-echo   deny-flow.md
+\---
 
-echo   invalid-override.md
 
-echo   replay-rejection.md
 
-echo   valid-override.md
+\## Why this matters
 
-echo.
 
-echo ---
 
-echo.
+Most systems collapse capability and authority:
 
-echo ## Core takeaway
 
-echo.
 
-echo Execution is not governed by what a system can do.
+If a system can produce an action, it is often allowed to execute it.
 
-echo Execution is governed by what a system is allowed to do — at the moment of execution.
 
-) > README.md
 
-## Structure
+UAA separates these concerns:
+
+
+
+\- capability → what can be generated  
+
+\- authority → what is allowed to execute  
+
+
+
+This repository demonstrates that separation in executable form.
+
+
+
+\---
+
+
+
+\## Repository role
+
+
+
+This is the \*\*reference surface\*\* for UAA.
+
+
+
+It is designed to:
+
+
+
+\- be runnable  
+
+\- be inspectable  
+
+\- prove enforcement behavior  
+
+
+
+It is not a full production system and does not include full infrastructure, cryptographic deployment, or distributed enforcement layers.
+
+
+
+\---
+
+
+
+\## Structure
+
+
 
 This repository is intentionally minimal and scoped to the execution boundary.
 
-reference-surface/
-  canonicalize.py
-  admissibility.py
-  authorization.py
-  replay_cache.py
-  control_point.py
-  run_demo.py
 
-examples/
-  README.md
-  allow-flow.md
-  boundary-tightening.md
-  bypass-rejection.md
-  deny-flow.md
-  invalid-override.md
-  replay-rejection.md
-  valid-override.md
+
+
+\---
+
+
+
+\## Core takeaway
+
+
+
+Execution is not governed by what a system can do.
+
+
+
+Execution is governed by what a system is allowed to do — at the moment of execution.
+
+
+
