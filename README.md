@@ -1,152 +1,132 @@
-\# UAA Reference Surface
+cd C:\\Users\\18177\\OneDrive\\Desktop\\uaa(
 
+echo # UAA Reference Surface
 
+echo.
 
-This repository provides a minimal executable proof of \*\*Unified Agency Architecture (UAA)\*\* as an execution-governance control system.
+echo This repository provides a minimal executable proof of \*\*Unified Agency Architecture (UAA)\*\* as an execution-governance control system.
 
+echo.
 
+echo UAA enforces a single governing invariant:
 
-UAA enforces a single governing invariant:
+echo.
 
+echo \*\*Execution authority does not exist by default.\*\*
 
+echo.
 
-\*\*Execution authority does not exist by default.\*\*
+echo Systems may generate arbitrary actions, but no action is allowed to execute unless authority is explicitly derived at runtime and verified at the control point immediately before execution.
 
+echo.
 
+echo ---
 
-Systems may generate arbitrary actions, but no action is allowed to execute unless authority is explicitly derived at runtime and verified at the control point immediately before execution.
+echo.
 
+echo ## What this repository proves
 
+echo.
 
-\---
+echo - canonical action representation
 
+echo - admissibility evaluation against an active boundary
 
+echo - authorization artifact issuance per attempt
 
-\## What this repository proves
+echo - control-point verification immediately before execution
 
+echo - replay detection and rejection
 
+echo - fail-closed behavior
 
-This reference surface demonstrates that execution can be governed externally with:
+echo - zero execution without valid authority
 
+echo.
 
+echo ---
 
-\- canonical action representation
+echo.
 
-\- admissibility evaluation against an active boundary
+echo ## Run the demo
 
-\- authorization artifact issuance per attempt
+echo.
 
-\- control-point verification immediately before execution
+echo python examples\\demo.py
 
-\- replay detection and rejection
+echo.
 
-\- fail-closed behavior
+echo Expected behavior:
 
-\- zero execution without valid authority
+echo - valid action → EXECUTED
 
+echo - replayed token → BLOCKED
 
+echo - invalid action → rejected
 
-\---
+echo - execution without token → BLOCKED
 
+echo.
 
+echo ---
 
-\## Run the demo
+echo.
 
+echo ## Structure
 
+echo.
 
-From the repository root:
+echo This repository is intentionally minimal and scoped to the execution boundary.
 
+echo.
 
+echo reference-surface/
 
-Expected behavior:
+echo   canonicalize.py
 
+echo   admissibility.py
 
+echo   authorization.py
 
-\- valid action → EXECUTED  
+echo   replay\_cache.py
 
-\- replayed token → BLOCKED (replay detected)  
+echo   control\_point.py
 
-\- invalid action → rejected at admissibility  
+echo   run\_demo.py
 
-\- execution without token → BLOCKED  
+echo.
 
+echo examples/
 
+echo   README.md
 
-\---
+echo   allow-flow.md
 
+echo   boundary-tightening.md
 
+echo   bypass-rejection.md
 
-\## Why this matters
+echo   deny-flow.md
 
+echo   invalid-override.md
 
+echo   replay-rejection.md
 
-Most systems collapse capability and authority:
+echo   valid-override.md
 
+echo.
 
+echo ---
 
-If a system can produce an action, it is often allowed to execute it.
+echo.
 
+echo ## Core takeaway
 
+echo.
 
-UAA separates these concerns:
+echo Execution is not governed by what a system can do.
 
+echo Execution is governed by what a system is allowed to do — at the moment of execution.
 
-
-\- capability → what can be generated  
-
-\- authority → what is allowed to execute  
-
-
-
-This repository demonstrates that separation in executable form.
-
-
-
-\---
-
-
-
-\## Repository role
-
-
-
-This is the \*\*reference surface\*\* for UAA.
-
-
-
-It is designed to:
-
-\- be runnable
-
-\- be inspectable
-
-\- prove enforcement behavior
-
-
-
-It is not a full production system and does not include full infrastructure, cryptographic deployment, or distributed enforcement layers.
-
-
-
-\---
-
-
-
-\## Structure
-
-
-
-\---
-
-
-
-\## Core takeaway
-
-
-
-Execution is not governed by what a system can do.
-
-
-
-Execution is governed by what a system is allowed to do — at the moment of execution.
+) > README.md
 
