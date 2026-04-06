@@ -1,4 +1,4 @@
-# Unified Agency Architecture (UAA)
+ï»¿# Unified Agency Architecture (UAA)
 
 Unified Agency Architecture (UAA) defines an execution model in which:
 
@@ -6,8 +6,8 @@ Unified Agency Architecture (UAA) defines an execution model in which:
 
 UAA separates:
 
-- **Capability** — the ability to generate an action
-- **Authority** — the permission for that action to execute
+- Capability - the ability to generate an action
+- Authority - the permission for that action to execute
 
 Authority is derived only at runtime through admissibility evaluation and must be verified at the execution boundary immediately before effectuation.
 
@@ -31,7 +31,7 @@ It defines an execution architecture where:
 
 ## Core Execution Sequence
 
-canonicalize ? admissibility ? authorization ? control point verification ? execution / block
+canonicalize -> admissibility -> authorization -> control point verification -> execution / block
 
 This sequence is the minimum governed path for UAA-conformant execution.
 
@@ -41,11 +41,11 @@ No execution path may bypass control-point verification.
 
 ## What This Repository Contains
 
-- core/ — foundational invariants
-- ormal/ — execution semantics, artifact model, conformance mapping, verification
-- oundary/ — boundary definition
-- udit/ — audit model and example records
-- examples/reference_surface/ — runnable reference surface
+- core/ - foundational invariants
+- ormal/ - execution semantics, artifact model, conformance mapping, verification
+- oundary/ - boundary definition
+- udit/ - audit model and example records
+- examples/reference_surface/ - runnable reference surface
 
 ---
 
@@ -71,20 +71,20 @@ This is not a production system. It is a minimal enforcement surface proving the
 
 The architecture is defined across five linked layers:
 
-1. **Invariants**  
+1. Invariants  
    Non-default authority, fail-closed execution, replay resistance, no effect on block
 
-2. **Execution Semantics**  
+2. Execution Semantics  
    Normative sequence from proposal to execution or block
 
-3. **Authorization Artifact Model**  
+3. Authorization Artifact Model  
    Per-attempt, bound, non-replayable, time-bounded authority object
 
-4. **Boundary Model**  
+4. Boundary Model  
    Active constraint state under which admissibility is evaluated
 
-5. **Audit Model**  
-   Minimum evidence required to reconstruct execution vs block outcomes
+5. Audit Model  
+   Minimum evidence required to reconstruct execution vs. block outcomes
 
 These layers are linked through ormal/conformance-mapping.md.
 
