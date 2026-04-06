@@ -1,118 +1,144 @@
-\# UAA Reference Surface
+# Unified Agency Architecture (UAA)
 
-
-
-This directory provides a minimal, executable reference surface for Unified Agency Architecture (UAA) enforcement.
-
-
-
-It demonstrates the governing principle:
-
-
+Unified Agency Architecture (UAA) defines an execution model where:
 
 > Execution authority does not exist by default.
 
+UAA separates:
+- **Capability** — the ability to generate an action  
+- **Authority** — the permission for that action to execute  
 
+Authority is not implicit. It is derived at runtime through admissibility evaluation and enforced at the execution boundary.
 
-All execution attempts are:
+---
 
-1\. Canonicalized
+## Core Execution Model
 
-2\. Evaluated for admissibility against a boundary state
-
-3\. Authorized via a per-attempt artifact (if admissible)
-
-4\. Verified immediately before execution at a control point
-
-5\. Either executed (with proof) or blocked (with no effect)
-
-
-
-\---
-
-
-
-\## Enforcement Flow
-
-
+All execution must follow:
 
 canonicalize → admissibility → authorization → control point verification → execution / block
 
+If no valid authorization artifact is present at the control point, execution cannot occur.
 
+If verification fails at the control point, execution is denied and no side effects occur.
 
-This flow enforces the following invariants:
+All execution authority is validated at the control point immediately prior to execution.
 
+No execution path may bypass control point verification.
 
+---
 
-\- Non-default authority
+## Foundational Invariants
 
-\- Admissibility precedes authority
+- Non-default authority  
+- Admissibility precedes authority  
+- Fail-closed execution  
+- Artifact-required execution  
+- Control-point verification  
+- No effect on block  
+- Replay resistance  
+- Measurement is not authority  
 
-\- Fail-closed execution
+These invariants define UAA as a deterministic execution authority architecture.
 
-\- Artifact-required execution
+---
 
-\- Control-point verification
+## Repository Structure
 
-\- No effect on block
+core/  
+formal/  
+governance/  
+enforcement/  
+audit/  
+boundary/  
+examples/  
+  reference_surface/  
 
-\- Replay resistance
+- `/core` — execution semantics and invariant definitions  
+- `/formal` — formal models, artifact structure, and system definitions  
+- `/governance` — boundary state and override logic  
+- `/enforcement` — control point and execution enforcement logic  
+- `/audit` — verification, logging, and evidence structures  
+- `/boundary` — admissibility state definitions  
+- `/examples` — runnable reference implementations  
 
+---
 
+## Reference Surface
 
-\---
+A minimal executable reference is provided at:
 
+`examples/reference_surface/`
 
+Run:
 
-\## Files
+`python examples/reference_surface/run_demo.py`
 
+This demonstrates:
 
+- admissible execution  
+- blocked execution  
+- replay rejection  
+- deterministic enforcement at the execution boundary  
 
-\- `canonicalize.py`  
+---
 
-&#x20; Deterministic canonical action representation
+## Category Definition
 
+UAA is not:
 
+- access control  
+- policy enforcement  
+- monitoring  
+- post-hoc auditing  
 
-\- `admissibility.py`  
+UAA is:
 
-&#x20; Boundary evaluation (admissible / non-admissible)
+> An execution authority architecture in which admissibility is evaluated externally and enforced at the point of execution.
 
+---
 
+## Enforcement Model
 
-\- `authorization.py`  
+- Authorization is **per-attempt**, not persistent  
+- Authorization artifacts are **non-replayable**  
+- Enforcement occurs at **mandatory control points**  
+- All execution paths must pass through verification  
+- No execution path may bypass enforcement  
+- Failure to verify results in **no execution and no effect**  
 
-&#x20; Authorization artifact issuance (per attempt)
+---
 
+## Scope
 
+This repository defines:
 
-\- `replay\_cache.py`  
+- the execution model  
+- the governing invariants  
+- the enforcement structure  
+- a minimal reference surface  
 
-&#x20; Replay detection and prevention
+This is not a production system.
 
+Production implementations extend this with:
 
+- cryptographic signing  
+- distributed control planes  
+- system-level enforcement integration  
+- persistent audit chains  
 
-\- `control\_point.py`  
+---
 
-&#x20; Final verification immediately before execution
+## Status
 
+Category defined  
+Reference surface implemented  
+Formal specification in progress  
 
+---
 
-\- `run\_demo.py`  
+## Author
 
-&#x20; End-to-end demonstration of allow + block behavior
-
-
-
-\---
-
-
-
-\## Running the Reference
-
-
-
-From this directory:
-
-
-
+Ashley Harris  
+Independent Researcher  
+Unified Agency Architecture
