@@ -134,3 +134,12 @@ An execution authority architecture in which admissibility is evaluated external
 Ashley Harris  
 Independent Researcher  
 Unified Agency Architecture
+
+---
+
+## Scope
+
+This repository defines the architectural model and a minimal reference surface.
+
+Production implementations, enforcement mechanisms, and deployment configurations are not included.
+
