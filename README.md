@@ -142,4 +142,3 @@ Unified Agency Architecture
 This repository defines the architectural model and a minimal reference surface.
 
 Production implementations, enforcement mechanisms, and deployment configurations are not included.
-
