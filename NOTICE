@@ -1,0 +1,7 @@
+﻿Unified Agency Architecture (UAA)
+
+This repository defines an execution-governance architecture in which execution authority does not exist by default and must be derived at runtime from admissibility under an active governing boundary.
+
+The architectural category defined here is distinct from conventional access control, static permissioning, prompt-layer restriction, or after-the-fact policy review.
+
+All authoritative execution in UAA depends on immediate pre-execution verification at required control points.

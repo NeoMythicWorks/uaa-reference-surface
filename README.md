@@ -1,134 +1,101 @@
-# Unified Agency Architecture (UAA)
+﻿# Unified Agency Architecture (UAA)
 
 ## Execution Authority Is Not Default
 
-Unified Agency Architecture (UAA) defines an execution model in which:
+Unified Agency Architecture (UAA) defines an execution-governance model in which:
 
-- Capability != Authority
+- Capability is not authority
 - Authority does not exist by default
 - Authority must be derived at runtime and verified at execution
 
 ---
 
-## Core Execution Path
+## Definition
 
-```text
-canonicalize -> admissibility -> authorization -> control point verification -> execution / block
-```
+Unified Agency Architecture (UAA) is an execution-governance architecture in which execution authority is derived at runtime from admissibility under an active governing boundary.
 
-No execution path may bypass control point verification.
-
-Failure to verify results in block with no effect.
+It separates action generation from execution permission and requires that every path to effectuation pass through a control point where authorization is verified immediately before execution.
 
 ---
 
-## Why This Exists
+## Core Principle
 
-Most systems implicitly grant execution authority once an action is generated.
+> Execution authority does not exist by default.
 
-UAA rejects that assumption.
-
-It enforces:
-
-- non-default authority
-- admissibility before execution
-- per-attempt authorization
-- mandatory control point verification
-- fail-closed outcomes
+Systems may generate actions, recommendations, or candidate operations, but no action is permitted to execute unless it is admissible under the active governing boundary and authorized for that specific execution attempt.
 
 ---
 
-## Repository Structure
+## Foundational Invariants
 
-```text
-core/        - invariants
-formal/      - execution semantics, artifact model, verification
-boundary/    - admissibility state
-audit/       - evidence and logging model
-examples/    - runnable enforcement surface
-```
+1. **Non-Default Authority**  
+   No execution is permitted without explicit authorization.
 
----
+2. **Admissibility Precedes Authority**  
+   All actions must be evaluated against a governing boundary before execution authority can exist.
 
-## Reference Surface (Proof)
+3. **Fail-Closed Execution**  
+   If evaluation, artifact issuance, or verification fails, the system produces no effect.
 
-Run:
+4. **Artifact-Required Execution**  
+   Execution requires a valid authorization artifact bound to the specific attempt.
 
-```text
-python examples/reference_surface/run_demo.py
-```
+5. **Control Point Verification**  
+   Authorization is verified at the execution boundary, not assumed from upstream approval.
 
-Demonstrates:
+6. **No Effect on Block**  
+   Rejected or unverifiable actions produce zero side effects.
 
-- EXECUTED (valid authority)
-- BLOCKED: replay detected
-- BLOCKED: no token
-- BLOCKED: control point not invoked
-- BLOCKED: boundary mismatch
+7. **Monotone Boundary**  
+   Constraints may tighten automatically but cannot relax without explicit override.
+
+8. **Measurement Is Not Authority**  
+   Metrics, telemetry, and scores may inform constraint state but never grant execution permission.
 
 ---
 
-## Formal Architecture
+## Execution Sequence
 
-UAA is defined across:
+All execution attempts follow this sequence:
 
-1. Invariants
-2. Execution Semantics
-3. Authorization Artifact Model
-4. Boundary Model
-5. Audit Model
+`request -> canonicalization -> boundary evaluation -> admissibility decision -> authorization artifact issuance -> control point verification -> execution or block`
 
-Linked via:
-
-`formal/conformance-mapping.md`
+Execution is not valid unless this sequence completes successfully at the required enforcement point.
 
 ---
 
-## Verification
+## Architectural Separation
 
-```text
-python -m compileall .
-python examples/reference_surface/run_demo.py
-```
+UAA separates:
+
+- **Capability**: what a system can generate, propose, or prepare
+- **Authority**: what is permitted to execute under the active governing regime
+
+This separation is load-bearing. Capability alone never implies execution permission.
 
 ---
 
-## Category Definition
+## Repository Purpose
 
-UAA is not:
+This repository provides a minimal reference surface for Unified Agency Architecture (UAA).
 
-- access control
-- policy engines
-- monitoring systems
+It is intended to make the architectural model inspectable and to demonstrate:
 
-UAA is:
+- boundary-based admissibility evaluation
+- authorization artifact requirement
+- verification at the execution boundary
+- fail-closed enforcement behavior
+- zero-effect blocking semantics
 
-An execution authority architecture enforcing admissibility at the point of execution.
+UAA is not a policy suggestion layer, prompt wrapper, or conventional access-control scheme. It defines an execution-governance layer.
 
 ---
 
 ## Status
 
-- Category defined
-- Formal layer established
-- Enforcement surface operational
-- Conformance mapping complete
+Reference Surface v1.0
 
----
-
-## Scope Boundary
-
-This repository contains:
-
-- architectural definition
-- formal structure
-- minimal enforcement surface
-
-This repository does NOT contain:
-
-- production enforcement systems
-- deployment configurations
-- proprietary execution infrastructure
+Formal paper in development for SSRN, Zenodo, and IEEE submission tracks.
 
 ---
 
