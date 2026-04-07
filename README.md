@@ -1,13 +1,12 @@
 # Unified Agency Architecture (UAA)
 
-## ## Execution Authority Is Not Default
+## Execution Authority Is Not Default
 
 Unified Agency Architecture (UAA) defines an execution model in which:
 
 - Capability != Authority
 - Authority does not exist by default
 - Authority must be derived at runtime and verified at execution
-  
 
 ---
 
@@ -15,11 +14,15 @@ Unified Agency Architecture (UAA) defines an execution model in which:
 
 ```text
 canonicalize -> admissibility -> authorization -> control point verification -> execution / block
+```
+
 No execution path may bypass control point verification.
 
 Failure to verify results in block with no effect.
 
-Why This Exists
+---
+
+## Why This Exists
 
 Most systems implicitly grant execution authority once an action is generated.
 
@@ -27,83 +30,110 @@ UAA rejects that assumption.
 
 It enforces:
 
-non-default authority
-admissibility before execution
-per-attempt authorization
-mandatory control point verification
-fail-closed outcomes
-Repository Structure
+- non-default authority
+- admissibility before execution
+- per-attempt authorization
+- mandatory control point verification
+- fail-closed outcomes
+
+---
+
+## Repository Structure
+
+```text
 core/        - invariants
 formal/      - execution semantics, artifact model, verification
 boundary/    - admissibility state
 audit/       - evidence and logging model
 examples/    - runnable enforcement surface
-Reference Surface (Proof)
+```
+
+---
+
+## Reference Surface (Proof)
 
 Run:
 
+```text
 python examples/reference_surface/run_demo.py
+```
 
 Demonstrates:
 
-EXECUTED (valid authority)
-BLOCKED: replay detected
-BLOCKED: no token
-BLOCKED: control point not invoked
-BLOCKED: boundary mismatch
-Formal Architecture
+- EXECUTED (valid authority)
+- BLOCKED: replay detected
+- BLOCKED: no token
+- BLOCKED: control point not invoked
+- BLOCKED: boundary mismatch
+
+---
+
+## Formal Architecture
 
 UAA is defined across:
 
-Invariants
-Execution Semantics
-Authorization Artifact Model
-Boundary Model
-Audit Model
+1. Invariants
+2. Execution Semantics
+3. Authorization Artifact Model
+4. Boundary Model
+5. Audit Model
 
 Linked via:
 
-formal/conformance-mapping.md
+`formal/conformance-mapping.md`
 
-Verification
+---
+
+## Verification
+
+```text
 python -m compileall .
 python examples/reference_surface/run_demo.py
-Category Definition
+```
+
+---
+
+## Category Definition
 
 UAA is not:
 
-access control
-policy engines
-monitoring systems
+- access control
+- policy engines
+- monitoring systems
 
 UAA is:
 
 An execution authority architecture enforcing admissibility at the point of execution.
 
-Status
-Category defined
-Formal layer established
-Enforcement surface operational
-Conformance mapping complete
-Scope Boundary
+---
+
+## Status
+
+- Category defined
+- Formal layer established
+- Enforcement surface operational
+- Conformance mapping complete
+
+---
+
+## Scope Boundary
 
 This repository contains:
 
-architectural definition
-formal structure
-minimal enforcement surface
+- architectural definition
+- formal structure
+- minimal enforcement surface
 
 This repository does NOT contain:
 
-production enforcement systems
-deployment configurations
-proprietary execution infrastructure
-Author
+- production enforcement systems
+- deployment configurations
+- proprietary execution infrastructure
 
-Ashley Harris
-Independent Researcher
+---
+
+## Author
+
+Ashley Harris  
+Independent Researcher  
 Unified Agency Architecture
-
-
-
-
