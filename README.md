@@ -1,145 +1,104 @@
 # Unified Agency Architecture (UAA)
 
+## Execution Authority Is Not Default
+
 Unified Agency Architecture (UAA) defines an execution model in which:
 
-Execution authority does not exist by default.
-
-UAA separates:
-
-- Capability - the ability to generate an action
-- Authority - the permission for that action to execute
-
-Authority is derived only at runtime through admissibility evaluation and must be verified at the execution boundary immediately before effectuation.
+- Capability != Authority  
+- Authority does not exist by default  
+- Authority must be derived at runtime and verified at execution  
 
 ---
 
-## Why UAA Exists
+## Core Execution Path
 
-Most systems treat the ability to act as if it already carries permission to execute.
-
-UAA rejects that model.
-
-It defines an execution architecture where:
-
-- authority is non-default
-- admissibility precedes execution
-- execution requires a per-attempt authorization artifact
-- verification occurs at a mandatory control point
-- failure resolves to block with no governed effect
-
----
-
-## Core Execution Sequence
-
+```text
 canonicalize -> admissibility -> authorization -> control point verification -> execution / block
+No execution path may bypass control point verification.
 
-This sequence is the minimum governed path for UAA-conformant execution.
+Failure to verify results in block with no effect.
 
-No execution path may bypass control-point verification.
+Why This Exists
 
----
+Most systems implicitly grant execution authority once an action is generated.
 
-## What This Repository Contains
+UAA rejects that assumption.
 
-- core/ - foundational invariants
-- formal/ - execution semantics, artifact model, conformance mapping, verification
-- boundary/ - boundary definition
-- audit/ - audit model and example records
-- examples/reference_surface/ - runnable reference surface
+It enforces:
 
----
-
-## What the Reference Surface Proves
+non-default authority
+admissibility before execution
+per-attempt authorization
+mandatory control point verification
+fail-closed outcomes
+Repository Structure
+core/        - invariants
+formal/      - execution semantics, artifact model, verification
+boundary/    - admissibility state
+audit/       - evidence and logging model
+examples/    - runnable enforcement surface
+Reference Surface (Proof)
 
 Run:
 
 python examples/reference_surface/run_demo.py
 
-The reference surface demonstrates:
+Demonstrates:
 
-- valid execution under verified authority
-- replay rejection
-- no-token blocking
-- boundary mismatch blocking
-- direct bypass blocking
+EXECUTED (valid authority)
+BLOCKED: replay detected
+BLOCKED: no token
+BLOCKED: control point not invoked
+BLOCKED: boundary mismatch
+Formal Architecture
 
-This is not a production system. It is a minimal enforcement surface proving the UAA model can be instantiated and verified.
+UAA is defined across:
 
----
+Invariants
+Execution Semantics
+Authorization Artifact Model
+Boundary Model
+Audit Model
 
-## Formal Layers
+Linked via:
 
-The architecture is defined across five linked layers:
+formal/conformance-mapping.md
 
-1. Invariants  
-   Non-default authority, fail-closed execution, replay resistance, no effect on block
-
-2. Execution Semantics  
-   Normative sequence from proposal to execution or block
-
-3. Authorization Artifact Model  
-   Per-attempt, bound, non-replayable, time-bounded authority object
-
-4. Boundary Model  
-   Active constraint state under which admissibility is evaluated
-
-5. Audit Model  
-   Minimum evidence required to reconstruct execution vs. block outcomes
-
-These layers are linked through formal/conformance-mapping.md.
-
----
-
-## How to Verify UAA
-
+Verification
 python -m compileall .
-
 python examples/reference_surface/run_demo.py
-
-Expected visible outcomes include:
-
-- EXECUTED
-- BLOCKED: replay detected
-- BLOCKED: no token
-- BLOCKED: control point not invoked
-
----
-
-## Category Definition
+Category Definition
 
 UAA is not:
 
-- access control
-- policy enforcement
-- monitoring
-- post-hoc auditing
+access control
+policy engines
+monitoring systems
 
 UAA is:
 
-An execution authority architecture in which admissibility is evaluated externally and enforced at the point of execution.
+An execution authority architecture enforcing admissibility at the point of execution.
 
----
+Status
+Category defined
+Formal layer established
+Enforcement surface operational
+Conformance mapping complete
+Scope Boundary
 
-## Current Status
+This repository contains:
 
-- Category defined
-- Formal layer established
-- Runnable reference surface implemented
-- Conformance mapping established
+architectural definition
+formal structure
+minimal enforcement surface
 
----
+This repository does NOT contain:
 
-## Author
+production enforcement systems
+deployment configurations
+proprietary execution infrastructure
+Author
 
-Ashley Harris  
-Independent Researcher  
+Ashley Harris
+Independent Researcher
 Unified Agency Architecture
-
----
-
-## Scope
-
-This repository defines the architectural model and a minimal reference surface.
-
-Production implementations, enforcement mechanisms, and deployment configurations are not included.
-
