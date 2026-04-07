@@ -93,6 +93,7 @@ These layers are linked through formal/conformance-mapping.md.
 ## How to Verify UAA
 
 python -m compileall .
+
 python examples/reference_surface/run_demo.py
 
 Expected visible outcomes include:
