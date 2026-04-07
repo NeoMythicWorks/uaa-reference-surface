@@ -4,9 +4,10 @@
 
 Unified Agency Architecture (UAA) defines an execution model in which:
 
-- Capability != Authority  
-- Authority does not exist by default  
-- Authority must be derived at runtime and verified at execution  
+- Capability != Authority
+- Authority does not exist by default
+- Authority must be derived at runtime and verified at execution
+  
 
 ---
 
@@ -102,4 +103,5 @@ Author
 Ashley Harris
 Independent Researcher
 Unified Agency Architecture
+
 
