@@ -1,6 +1,6 @@
 # Unified Agency Architecture (UAA)
 
-## Execution Authority Is Not Default
+## ## Execution Authority Is Not Default
 
 Unified Agency Architecture (UAA) defines an execution model in which:
 
@@ -103,5 +103,6 @@ Author
 Ashley Harris
 Independent Researcher
 Unified Agency Architecture
+
 
 
