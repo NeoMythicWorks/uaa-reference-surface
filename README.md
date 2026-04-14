@@ -1,4 +1,4 @@
-﻿# UAA Reference Surface
+# UAA Reference Surface
 
 Execution authority does not exist by default.
 
@@ -8,6 +8,10 @@ This repository demonstrates:
 - Authorization is verified at execution
 - Invalid or replayed authorization = zero execution effect
 
-Run:
+Run demo:
 
-py .\examples\demo.py
+python .\examples\demo.py
+
+Run full validation:
+
+python .\examples\test_demo.py
