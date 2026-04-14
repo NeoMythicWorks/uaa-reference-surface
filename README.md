@@ -33,3 +33,15 @@ You should see:
 ALL TESTS PASSED
 
 If any line differs, enforcement is not functioning as defined.
+
+---
+
+## Contact
+
+For discussion, inspection, or collaboration:
+
+governance@unifiedagencyarchitecture.org
+
+Official reference:
+https://unifiedagencyarchitecture.org/
+
