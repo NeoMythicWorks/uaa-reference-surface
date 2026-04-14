@@ -28,7 +28,7 @@ def assert_case(name, result, expected_msg):
     passed = (msg == expected_msg)
 
     status = "PASS" if passed else "FAIL"
-    print(f"[{status}] {name} ? {msg}")
+    print(f"[{status}] {name} - {msg}")
 
     if not passed:
         return False
@@ -41,14 +41,12 @@ def run_tests():
 
     results = []
 
-    # 1. No artifact
     results.append(assert_case(
         "no artifact",
         verify_at_control_point(None, good_state),
         "no authorization artifact"
     ))
 
-    # 2. Invalid artifact
     bad = {"payload": "bad", "sig": "bad"}
     results.append(assert_case(
         "invalid artifact",
@@ -56,7 +54,6 @@ def run_tests():
         "invalid authorization artifact"
     ))
 
-    # 3. Valid execution
     artifact_ok = issue_authorization_artifact(action, good_state)
     results.append(assert_case(
         "valid execution",
@@ -64,14 +61,12 @@ def run_tests():
         "action permitted"
     ))
 
-    # 4. Replay
     results.append(assert_case(
         "replay",
         verify_at_control_point(artifact_ok, good_state),
         "replay detected"
     ))
 
-    # 5. Boundary mismatch (fresh artifact)
     artifact_mismatch = issue_authorization_artifact(action, good_state)
     results.append(assert_case(
         "boundary mismatch",
